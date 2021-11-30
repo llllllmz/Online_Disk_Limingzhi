@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Table Basic - srtdash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="assets/css/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+
+<!--<a th:href="@{addForm(currentPath=${currentPath})}">上传文件</a></br>-->
+<!--<table border="1" style="width:800px;">-->
+<!--    <tr>-->
+<!--        <th>Name</th>-->
+<!--        <th>isfile</th>-->
+<!--        <th>len</th>-->
+<!--    </tr>-->
+<!--    <a href="javascript:history.back(-1)">返回上一页</a>-->
+<!--    <tr th:each="f : ${lists}">-->
+<!--        <td><a th:href="@{lists(path=${f.path})}" th:text="${f.name}"></a></td>-->
+<!--        <td th:text="${f.isFile}?'文件':'目录'"></td>-->
+<!--        <td th:text="${f.len}"></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{del(name=${f.name})}">删除</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a th:href="@{download(path=${f.path})}" th:if="${f.isFile} == True">下载</a>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <a th:href="@{renameForm(name=${f.name})}">重命名</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--            <h4 class="header-title">Thead secondary</h4>-->
+<a th:href="@{last(path=${currentPath})}" style="padding-right: 20px"><button type="button"class="btn btn-rounded btn-primary mb-3">返回上一级</button></a>
+<a th:href="@{addForm(currentPath=${currentPath})}"style="padding-right: 20px"><button type="button" class="btn btn-primary mb-3">上传文件</button></a>
+<a th:href="@{mkdirForm(currentPath=${currentPath})}"><button type="button" class="btn btn-primary mb-3">新建文件夹</button></a>
+<fieldset disabled="">
+    <input type="text" id="disabledTextInput" class="form-control" th:value="'当前位置：'+${relativePath}">
+</fieldset>
+            <div class="single-table">
+                <div class="table-responsive">
+                    <table class="table text-left" style="width:100%;">
+                        <thead class="text-uppercase bg-secondary">
+                        <tr class="text-white">
+                            <th scope="col">文件名</th>
+                            <th scope="col">大小</th>
+                            <th scope="col">修改时间</th>
+                            <th scope="col">操作</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="f : ${lists}">
+                            <td th:if="${f.isFile} == True"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;&nbsp;<a  th:text="${f.name}"></a></td>
+                            <td th:if="${f.isFile} == False"><i class="fa fa-folder-open-o">&nbsp;&nbsp;&nbsp;<a th:href="@{lists(path=${f.path})}" th:text="${f.name}"></a></td>
+                            <td th:text="${#numbers.formatDecimal(f.len,0,0)}+'B'" th:if="${f.isFile} == True and ${f.len}<1024"></td>
+                            <td th:text="${#numbers.formatDecimal(f.len/1024.0,0,1)}+'KB'" th:if="${f.isFile} == True and ${f.len}>=1024 and ${f.len}<1024*1024"></td>
+                            <td th:text="${#numbers.formatDecimal(f.len/1024/1024.0,0,1)}+'MB'" th:if="${f.isFile} == True and ${f.len}>=1024*1024 and ${f.len}<1024*1024*1024"></td>
+                            <td th:text="${#numbers.formatDecimal(f.len/1024/1024/1024.0,0,1)}+'GB'" th:if="${f.isFile} == True and ${f.len}>=1024*1024*1024 and ${f.len}<1024*1024*1024*1024"></td>
+                            <td th:if="${f.isFile} == False">-</td>
+                            <td th:text="${#dates.format(f.modificationTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td>
+                                <a th:href="@{del(name=${f.path})}"><i class="ti-trash"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a th:href="@{download(path=${f.path})}" th:if="${f.isFile} == True" style="color:#09aaff;"><i class="fa fa-cloud-download"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td>
+                                <a th:href="@{renameForm(name=${f.name},currentPath=${currentPath})}" style="color: #09aaff">重命名</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+</body>
+</html>

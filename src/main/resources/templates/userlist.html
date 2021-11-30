@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>用户管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="assets/css/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+
+<div class="single-table">
+    <div class="table-responsive">
+        <table class="table text-left" style="width:100%;">
+            <thead class="text-uppercase bg-secondary">
+            <tr class="text-white">
+                <th scope="col">用户名</th>
+                <th scope="col">状态</th>
+                <th scope="col">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${userList}">
+                <td th:text="${u.username}"></td>
+                <td th:if="${u.stat}==1">正常使用</td>
+                <td th:if="${u.stat}==0" style="color:#ff0000;">已被禁用</td>
+                <td>
+                    <a th:href="'chmod?username='+${u.username}+'&stat=0'" th:if="${u.stat} == 1 and ${u.permission} == 0"><button type="button" class="btn btn-rounded btn-danger mb-1 btn-xs">禁用</button></a>
+                    <a th:href="'chmod?username='+${u.username}+'&stat=1'" th:if="${u.stat} == 0 and ${u.permission} == 0"><button type="button" class="btn btn-rounded btn-secondary mb-1 btn-xs">恢复</button></a>
+                    <span th:if="${u.permission} == 1">管理员</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

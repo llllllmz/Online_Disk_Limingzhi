@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>重命名</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/metisMenu.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/slicknav.min.css">
+    <!-- amchart css -->
+    <link rel="stylesheet" href="assets/css/export.css" type="text/css" media="all" />
+    <!-- others css -->
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/default-css.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- modernizr css -->
+    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+<!--<form action="rename">-->
+<!--    <input type="hidden" name="currentPath" th:value="${param.currentPath}">-->
+<!--    <p>重命名：<input type="text" name="oldname" th:value="${oldname}" readonly="readonly"></p>-->
+<!--    <input type="text" name="newname">-->
+<!--    <input type="submit" value="提交">-->
+<!--</form>-->
+<a href="javascript:history.back(-1)"><button type="button" class="btn btn-rounded btn-primary mb-3">返回</button></a>
+<form action="rename" method="post">
+    <h4 class="header-title">重命名：</h4>
+    <input type="hidden" name="currentPath" th:value="${param.currentPath}">
+    <div class="form-group" style="width: 488px;">
+        <input class="form-control" type="text" name="oldname"  th:value="${oldname}" readonly="readonly" >
+    </div>
+    <div class="form-group" style="width: 488px;">
+        <input class="form-control" type="text" placeholder="请输入新名称" name="newname">
+    </div>
+    <div class="form-group-append">
+        <button class="btn btn-primary mb-3" type="submit">提交</button>
+    </div>
+
+
+</form>
+</body>
+</html>
